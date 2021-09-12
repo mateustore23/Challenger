@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <h2>Gato: <span th:text="${gato.nome}"></span></h2>
+    <h3>Data: <span th:text="${#temporals.format(modalidade.data,'dd/MM/yyyy')}"></span>
+        | Raça: <span th:text="${gato.raca}"></span>
+    </h3>
+    <h3>Quantidade de Usuarios: <span th:text="${usuarios.size()}"></span></h3>
+    <hr>
+    <h2>Usuarios</h2>
+    <div class="row">
+        <div class="col-sm-4" th:each="a:${usuarios}">
+            <div class="card  mb-2">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${a.nome}"></h5>
+                    <p class="card-text"
+                       th:text="${'Data Nascimento: ' + #temporals.format(a.dataNascimento,'dd/MM/yyyy')}"></p>
+                    <h6 class="card-subtitle" th:text="${a.gato.nome}"></h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card  mb-2">
+                <div class="card-body">
+                    <h5 class="card-title">Usuario</h5>
+                    <p class="card-text"></p>
+                    <a th:href="@{/usuario/cadastrar?gato=}+${gato.codigo}" class="btn btn-success">Novo</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
